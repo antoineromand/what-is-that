@@ -16,4 +16,13 @@ public class TestServiceUnitTest {
     Assertions.assertNotEquals("3   ", result);
     Assertions.assertEquals(expectedResult, result);
   }
+
+  @Test
+  public void shouldReturnHelloWorld() {
+    String expectedResult = "Hello World!";
+
+    String result = this.testService.returnHelloWorld();
+
+    Assertions.assertEquals(expectedResult, result);
+  }
 }
