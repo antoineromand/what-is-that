@@ -3,6 +3,7 @@ plugins {
 	id("org.springframework.boot") version "3.5.3"
 	id("io.spring.dependency-management") version "1.1.7"
 	jacoco
+	id("com.diffplug.spotless") version "7.0.4"
 }
 
 group = "com.ci-cd-example"
@@ -16,12 +17,20 @@ java {
 
 repositories {
 	mavenCentral()
+	gradlePluginPortal()
 }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+spotless {
+	java {
+		googleJavaFormat("1.17.0")
+		target("src/**/*.java")
+	}
 }
 
 tasks.withType<Test> {

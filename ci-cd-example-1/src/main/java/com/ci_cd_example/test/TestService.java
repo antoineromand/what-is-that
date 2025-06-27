@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public final class TestService {
-    public String convertToString(final int number) {
-        return number + "";
-    }
+  public String convertToString(final int number) {
+    return number + "";
+  }
 }
