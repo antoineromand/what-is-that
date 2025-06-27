@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - develop
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,7 +22,7 @@ jobs:
           java-version: '24'
 
       - name: Make Gradle executable
-        run: chmod +x gradlew
+        run: chmod +x ci-cd-example-1/gradlew
 
       - name: Run unit test
         # Utilisation du paramètre limit qui définit le pourcentage
