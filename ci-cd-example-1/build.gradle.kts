@@ -26,11 +26,26 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	finalizedBy(tasks.jacocoTestReport)
+	finalizedBy(tasks.jacocoTestCoverageVerification)
 }
 
-tasks.test {
-	finalizedBy(tasks.jacocoTestReport)
-}
 tasks.jacocoTestReport {
 	dependsOn(tasks.test)
+}
+
+tasks.check {
+	dependsOn(tasks.jacocoTestCoverageVerification)
+}
+
+val coverageLimit: BigDecimal = (project.findProperty("limit") as String?)?.toBigDecimalOrNull() ?: BigDecimal("0.8")
+
+tasks.jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = coverageLimit
+			}
+		}
+	}
 }

@@ -1,0 +1,27 @@
+# The CI pipeline to allow user to merge branch on develop.
+
+name: CI for develop branch
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run unit test
+        # Utilisation du paramètre limit qui définit le pourcentage
+        # 0.9 = 90 %
+        run: "./gradlew test -Plimit=0.9"
+
+      - name: Fail PR if overall coverage is less than 90%
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed('Overall coverage is less than 90%!')
