@@ -28,6 +28,7 @@ jobs:
         # Utilisation du paramètre limit qui définit le pourcentage
         # 0.9 = 90 %
         run: "./gradlew test -Plimit=0.9"
+        working-directory: ./ci-cd-example-1
 
       - name: Fail PR if overall coverage is less than 90%
         if: failure()
